@@ -1,9 +1,16 @@
-name: Build and publish
+name: Manual operation
 
 on:
-  push:
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]+*'
+  workflow_dispatch:
+    inputs:
+      flutter_channel:
+        default: 'beta'
+        required: true
+        type: choice
+        options:
+          - beta
+          - master
+          - stable
 
 jobs:
   build:
@@ -22,7 +29,7 @@ jobs:
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: beta
+          channel: ${{ inputs.flutter_channel }}
           cache: true
 
       - name: Install Dependencies
@@ -33,18 +40,17 @@ jobs:
         run: dart pub global activate flutter_distributor
         shell: bash
 
+      - name: Checking flutter
+        run: flutter doctor --verbose
+        shell: bash
+
+      - name: Analyze project source
+        run: dart analyze
+        shell: bash
+
       - name: Build APK
         run: flutter_distributor release --name all
         shell: bash
-
-      - name: Release APK
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: |
-            dist/**
-          draft: true
-          token: ${{ secrets.CALL_RELEASE }}
 
       - name: Archive APK
         uses: actions/upload-artifact@v4
