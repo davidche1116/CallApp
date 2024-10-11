@@ -43,7 +43,7 @@ dependencies:
   # 图标
   cupertino_icons: ^1.0.8
   # 设备信息
-  device_info_plus: ^10.1.2
+  device_info_plus: ^11.0.0
   # 图片
   extended_image: ^8.3.1
   # 文件选择
@@ -53,13 +53,13 @@ dependencies:
   # 图片压缩
   flutter_image_compress: ^2.3.0
   # 弹窗
-  flutter_smart_dialog: ^4.9.8+2
+  flutter_smart_dialog: ^4.9.8+3
   # 文字转语音
   flutter_tts: ^4.0.2
   # 图片编辑
   image_editor: ^1.5.1
   # 应用信息
-  package_info_plus: ^8.0.2
+  package_info_plus: ^8.0.3
   # 文件路径
   path_provider: ^2.1.4
   # 权限申请
@@ -67,13 +67,13 @@ dependencies:
   # 照片存储
   photo_manager: ^3.5.0
   # SQLite数据库
-  sqflite: ^2.3.3+2
+  sqflite: ^2.4.0
   # Android、iOS跳转
-  url_launcher: ^6.3.0
+  url_launcher: ^6.3.1
   # 震动
-  vibration: ^2.0.0
+  vibration: ^2.0.1
   # 图片选择
-  wechat_assets_picker: ^9.3.1
+  wechat_assets_picker: ^9.3.2
   # 微信视频拨打
   wechat_video_call: ^1.0.1
 

@@ -11,6 +11,7 @@ on:
           - beta
           - master
           - stable
+        description: 'flutter channel'
 
 jobs:
   build:
