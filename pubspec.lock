@@ -332,10 +332,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_tts
-      sha256: "02c65a10d3423dcd73e0236fb381dbd459d4a13ecfce40b9be41bd0bc4180733"
+      sha256: cbec5f0447223e1b4c47f893c7f8ef663ac582120c147e4a1e2cade7f2e8b0c8
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
     source: hosted
-    version: "4.1.0"
+    version: "4.2.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -374,7 +374,7 @@ packages:
     source: hosted
     version: "4.1.1"
   image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: image
       sha256: f31d52537dc417fdcde36088fdf11d191026fd5e4fae742491ebd40e5a8bea7d

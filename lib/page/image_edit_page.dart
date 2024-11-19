@@ -90,6 +90,7 @@ class _ImageEditPageState extends State<ImageEditPage> {
                         '完成',
                       ),
                     ),
+                    SizedBox(width: 20),
                   ],
                 ),
                 const Spacer(),
