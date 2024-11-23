@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 3.6.3+241114
+version: 3.6.4+241123
 
 environment:
-  sdk: ^3.6.0-334.3.beta
+  sdk: ^3.6.0-334.4.beta
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -49,7 +49,7 @@ dependencies:
   # 文件选择
   file_picker: ^8.1.4
   # 动画效果
-  flutter_animate: ^4.5.0
+  flutter_animate: ^4.5.1
   # 图片压缩
   flutter_image_compress: ^2.3.0
   # 尺子控件
@@ -59,7 +59,7 @@ dependencies:
   # 文字转语音
   flutter_tts: ^4.2.0
   # 图片编辑
-  image_editor: ^1.5.1
+  image_editor: ^1.6.0
   # 应用信息
   package_info_plus: ^8.1.1
   # 文件路径
@@ -67,7 +67,7 @@ dependencies:
   # 权限申请
   permission_handler: ^11.3.1
   # 照片存储
-  photo_manager: ^3.6.2
+  photo_manager: ^3.6.3
   # SQLite数据库
   sqflite: ^2.4.1
   # Android、iOS跳转
@@ -75,9 +75,9 @@ dependencies:
   # 震动
   vibration: ^2.0.1
   # 图片选择
-  wechat_assets_picker: ^9.4.0
+  wechat_assets_picker: ^9.4.1
   # 微信视频拨打
-  wechat_video_call: ^1.0.1
+  wechat_video_call: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -92,7 +92,7 @@ dev_dependencies:
 
   flutter_launcher_icons: ^0.14.1
 
-  flutter_native_splash: ^2.4.2
+  flutter_native_splash: ^2.4.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
