@@ -16,10 +16,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 3.6.4+241123
+version: 3.6.5+241212
 
 environment:
-  sdk: ^3.6.0-334.4.beta
+  sdk: ^3.6.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,7 +35,7 @@ dependencies:
     sdk: flutter
 
   # Android直接跳转打电话
-  android_intent_plus: ^5.2.0
+  android_intent_plus: ^5.2.1
   # 动画效果
   animations: ^2.0.11
   # 字尺寸自动调整
@@ -43,13 +43,13 @@ dependencies:
   # 图标
   cupertino_icons: ^1.0.8
   # 设备信息
-  device_info_plus: ^11.1.1
+  device_info_plus: ^11.2.0
   # 图片
-  extended_image: ^9.0.7
+  extended_image: ^9.0.9
   # 文件选择
-  file_picker: ^8.1.4
+  file_picker: ^8.1.6
   # 动画效果
-  flutter_animate: ^4.5.1
+  flutter_animate: ^4.5.2
   # 图片压缩
   flutter_image_compress: ^2.3.0
   # 尺子控件
@@ -61,7 +61,7 @@ dependencies:
   # 图片编辑
   image_editor: ^1.6.0
   # 应用信息
-  package_info_plus: ^8.1.1
+  package_info_plus: ^8.1.2
   # 文件路径
   path_provider: ^2.1.5
   # 权限申请
@@ -75,7 +75,7 @@ dependencies:
   # 震动
   vibration: ^2.0.1
   # 图片选择
-  wechat_assets_picker: ^9.4.1
+  wechat_assets_picker: ^9.4.2
   # 微信视频拨打
   wechat_video_call: ^1.0.2
 
@@ -90,7 +90,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
 
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.2
 
   flutter_native_splash: ^2.4.3
 

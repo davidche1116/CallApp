@@ -6,8 +6,8 @@
 
 ## 开发环境
 
-- flutter 3.27.0-0.2.pre
-- dart 3.6.0-334.4.beta
+- flutter 3.27.1
+- dart 3.6.0
 - gradle 8.3
 - gradle-plugin 8.1.4
 - kotlin 1.8.22
