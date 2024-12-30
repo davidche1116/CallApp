@@ -47,7 +47,7 @@ dependencies:
   # 图片
   extended_image: ^9.0.9
   # 文件选择
-  file_picker: ^8.1.6
+  file_picker: ^8.1.7
   # 动画效果
   flutter_animate: ^4.5.2
   # 图片压缩
@@ -57,7 +57,7 @@ dependencies:
   # 弹窗
   flutter_smart_dialog: ^4.9.8+5
   # 文字转语音
-  flutter_tts: ^4.2.0
+  flutter_tts: ^4.2.1
   # 图片编辑
   image_editor: ^1.6.0
   # 应用信息
@@ -92,7 +92,7 @@ dev_dependencies:
 
   flutter_launcher_icons: ^0.14.2
 
-  flutter_native_splash: ^2.4.3
+  flutter_native_splash: ^2.4.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
