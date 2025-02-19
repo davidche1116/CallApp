@@ -6,10 +6,10 @@
 
 ## 开发环境
 
-- flutter 3.27.1
-- dart 3.6.0
-- gradle 8.3
-- gradle-plugin 8.1.4
+- flutter 3.29.0
+- dart 3.7.0
+- gradle 8.10.2
+- gradle-plugin 8.7.0
 - kotlin 1.8.22
 
 ## 功能特点
