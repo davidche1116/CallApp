@@ -17,14 +17,17 @@ class DataPage extends StatelessWidget {
     '将当前数据库导出并（不包含图片信息）',
   ];
 
-  static _clear() async {
-    WidgetUtil.confirmPopup('是否清空所有数据？不可恢复！', onTap: () async {
-      await DbUtil().cleanAllTab();
-      WidgetUtil.showToast('已清空');
-    });
+  static Future<void> _clear() async {
+    WidgetUtil.confirmPopup(
+      '是否清空所有数据？不可恢复！',
+      onTap: () async {
+        await DbUtil().cleanAllTab();
+        WidgetUtil.showToast('已清空');
+      },
+    );
   }
 
-  static _import() async {
+  static Future<void> _import() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       await DbUtil().import(result.paths.first!);
@@ -32,10 +35,12 @@ class DataPage extends StatelessWidget {
     WidgetUtil.showToast(result != null ? '导入成功' : '取消导入');
   }
 
-  static _export() async {
+  static Future<void> _export() async {
     Uint8List bytes = await DbUtil().getDataBytes();
-    String? outputFile = await FilePicker.platform
-        .saveFile(fileName: 'call_info.db', bytes: bytes);
+    String? outputFile = await FilePicker.platform.saveFile(
+      fileName: 'call_info.db',
+      bytes: bytes,
+    );
     WidgetUtil.showToast(outputFile != null ? '导出成功' : '取消导出');
   }
 
@@ -44,9 +49,7 @@ class DataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('数据库管理'),
-      ),
+      appBar: AppBar(title: const Text('数据库管理')),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         children: [for (int i = 0; i < titleList.length; ++i) _buildItem(i)],

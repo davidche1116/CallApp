@@ -25,28 +25,23 @@ class DbUtil {
       path,
       onCreate: (db, version) async {
         /// 创建拨号记录表
-        await db.execute(
-          '''
+        await db.execute('''
           CREATE TABLE CALL_RECORD(
           ID INTEGER PRIMARY KEY,
           PHONE TEXT(32) NOT NULL,
           TIME TEXT(32))
-          ''',
-        );
+          ''');
 
         /// 创建微信视频记录表
-        await db.execute(
-          '''
+        await db.execute('''
           CREATE TABLE WECHAT_RECORD(
           ID INTEGER PRIMARY KEY,
           PHONE TEXT(32) NOT NULL,
           TIME TEXT(32))
-          ''',
-        );
+          ''');
 
         /// 创建信息表
-        await db.execute(
-          '''
+        await db.execute('''
           CREATE TABLE CALL_INFO(
           ID INTEGER PRIMARY KEY,
           NUM INTEGER DEFAULT 100,
@@ -55,12 +50,10 @@ class DbUtil {
           VOICE TEXT(32),
           WECHAT TEXT(32),
           PHOTO TEXT(256))
-          ''',
-        );
+          ''');
 
         /// 创建语音震动配置表
-        await db.execute(
-          '''
+        await db.execute('''
           CREATE TABLE VOICE_SET(
           ID INTEGER PRIMARY KEY,
           VOICE INTEGER DEFAULT 1,
@@ -70,8 +63,7 @@ class DbUtil {
           VIBRATION INTEGER DEFAULT 1,
           DURATION INTEGER DEFAULT 100,
           AMPLITUDE INTEGER DEFAULT 125)
-          ''',
-        );
+          ''');
       },
       // Set the version. This executes the onCreate function and provides a
       // path to perform database upgrades and downgrades.
@@ -101,8 +93,10 @@ class DbUtil {
 
   /// 查询所有电话号码信息
   Future<List<PhoneInfo>> queryInfo() async {
-    List<Map<String, Object?>> maps =
-        await _database.query('CALL_INFO', orderBy: 'NUM');
+    List<Map<String, Object?>> maps = await _database.query(
+      'CALL_INFO',
+      orderBy: 'NUM',
+    );
 
     // Convert the List<Map<String, dynamic> into a List<PhoneInfo>.
     List<PhoneInfo> ret = List.generate(maps.length, (i) {
@@ -122,8 +116,11 @@ class DbUtil {
 
   /// 根据ID查询电话号码信息
   Future<PhoneInfo?> queryInfoById(int id) async {
-    List<Map<String, Object?>> maps =
-        await _database.query('CALL_INFO', where: 'ID = ?', whereArgs: [id]);
+    List<Map<String, Object?>> maps = await _database.query(
+      'CALL_INFO',
+      where: 'ID = ?',
+      whereArgs: [id],
+    );
 
     if (maps.isEmpty) {
       return null;
@@ -182,10 +179,7 @@ class DbUtil {
 
   /// 数据库插入[record】通话记录
   Future<void> addRecord(PhoneInfo info) async {
-    var record = CallRecord(
-      info.phone,
-      DateTime.now(),
-    );
+    var record = CallRecord(info.phone, DateTime.now());
 
     await _database.insert(
       'CALL_RECORD',
@@ -196,10 +190,7 @@ class DbUtil {
 
   /// 数据库插入[record】通话记录
   Future<void> addWechatRecord(PhoneInfo info) async {
-    var record = CallRecord(
-      info.wechat,
-      DateTime.now(),
-    );
+    var record = CallRecord(info.wechat, DateTime.now());
 
     await _database.insert(
       'WECHAT_RECORD',
@@ -210,14 +201,17 @@ class DbUtil {
 
   /// 根据时间范围查询通话记录
   Future<List<CallRecord>> queryRecord(String start, String end) async {
-    List<Map<String, Object?>> maps = await _database.rawQuery('''
+    List<Map<String, Object?>> maps = await _database.rawQuery(
+      '''
     SELECT CALL_RECORD.ID, CALL_RECORD.PHONE, CALL_RECORD.TIME, CALL_INFO.NAME, CALL_INFO.PHOTO
     FROM CALL_RECORD LEFT OUTER JOIN CALL_INFO
     ON CALL_RECORD.PHONE = CALL_INFO.PHONE
     where
     CALL_RECORD.TIME >= ? AND CALL_RECORD.TIME <= ?
     ORDER BY CALL_RECORD.TIME DESC
-    ''', [start, '$end 23:59:59']);
+    ''',
+      [start, '$end 23:59:59'],
+    );
 
     // Convert the List<Map<String, dynamic> into a List<CallRecord>.
     return List.generate(maps.length, (i) {
@@ -233,14 +227,17 @@ class DbUtil {
 
   /// 根据时间范围查询通话记录
   Future<List<CallRecord>> queryWechatRecord(String start, String end) async {
-    List<Map<String, Object?>> maps = await _database.rawQuery('''
+    List<Map<String, Object?>> maps = await _database.rawQuery(
+      '''
     SELECT WECHAT_RECORD.ID, WECHAT_RECORD.PHONE, WECHAT_RECORD.TIME, CALL_INFO.NAME, CALL_INFO.PHOTO
     FROM WECHAT_RECORD LEFT OUTER JOIN CALL_INFO
     ON WECHAT_RECORD.PHONE = CALL_INFO.WECHAT
     where
     WECHAT_RECORD.TIME >= ? AND WECHAT_RECORD.TIME <= ?
     ORDER BY WECHAT_RECORD.TIME DESC
-    ''', [start, '$end 23:59:59']);
+    ''',
+      [start, '$end 23:59:59'],
+    );
 
     // Convert the List<Map<String, dynamic> into a List<CallRecord>.
     return List.generate(maps.length, (i) {
@@ -256,12 +253,14 @@ class DbUtil {
 
   /// 获取[phone]今日已拨打次数
   Future<int> getTodayNum(String phone) async {
-    List<Map<String, Object?>> maps = await _database.query('CALL_RECORD',
-        where: 'PHONE = ? AND TIME >= ?',
-        whereArgs: [
-          phone,
-          '${DateTime.now().toString().substring(0, 10)} 00:00:00'
-        ]);
+    List<Map<String, Object?>> maps = await _database.query(
+      'CALL_RECORD',
+      where: 'PHONE = ? AND TIME >= ?',
+      whereArgs: [
+        phone,
+        '${DateTime.now().toString().substring(0, 10)} 00:00:00',
+      ],
+    );
     return maps.length;
   }
 
@@ -296,8 +295,10 @@ class DbUtil {
 
   /// 获取语音播报配置
   Future<VoiceVibrationSet> getVoiceVibration() async {
-    List<Map<String, Object?>> maps =
-        await _database.query('VOICE_SET', where: 'ID = 0');
+    List<Map<String, Object?>> maps = await _database.query(
+      'VOICE_SET',
+      where: 'ID = 0',
+    );
 
     // Convert the List<Map<String, dynamic> into a List<VoiceSet>.
     List<VoiceVibrationSet> list = List.generate(maps.length, (i) {

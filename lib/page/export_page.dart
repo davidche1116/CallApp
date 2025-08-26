@@ -22,63 +22,61 @@ class ExportPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              WidgetUtil.confirmPopup('是否导出所有联系人照片到相册？', onTap: () async {
-                await _exportAll();
-                WidgetUtil.showToast('导出成功');
-              });
+              WidgetUtil.confirmPopup(
+                '是否导出所有联系人照片到相册？',
+                onTap: () async {
+                  await _exportAll();
+                  WidgetUtil.showToast('导出成功');
+                },
+              );
             },
-            icon: const Icon(
-              CupertinoIcons.tray,
-            ),
+            icon: const Icon(CupertinoIcons.tray),
           ),
         ],
       ),
       body: ValueListenableBuilder(
-          valueListenable: PhoneInfo.globalInfoList,
-          builder:
-              (BuildContext context, List<PhoneInfo> value, Widget? child) {
-            return value.isNotEmpty
-                ? ListView.builder(
-                    itemCount: value.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: WidgetUtil.photoImageIcon(value[index].photo),
-                        title: AutoSizeText(
-                          value[index].name,
-                          style: StyleUtil.textStyle,
-                        ),
-                        trailing: AutoSizeText(
-                          value[index].phone,
-                          style: StyleUtil.textStyle,
-                        ),
-                        onTap: () async {
-                          await WidgetUtil.confirmPopup(
-                            '是否导出【${value[index].name}】这个联系人的照片到相册？',
-                            onTap: () async {
-                              WidgetUtil.showLoading('导出中');
-                              try {
-                                await _export(value[index]);
-                                WidgetUtil.hideLoading();
-                                WidgetUtil.showToast(
-                                    '导出【${value[index].name}】成功');
-                              } catch (e) {
-                                WidgetUtil.hideLoading();
-                                WidgetUtil.showToast(
-                                    '导出【${value[index].name}】失败');
-                              }
-                            },
-                          );
-                        },
-                      );
-                    },
-                  )
-                : Center(
-                    child: Text(
-                      '没有联系人',
-                      style: StyleUtil.textStyle,
-                    ),
-                  );
-          }),
+        valueListenable: PhoneInfo.globalInfoList,
+        builder: (BuildContext context, List<PhoneInfo> value, Widget? child) {
+          return value.isNotEmpty
+              ? ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: WidgetUtil.photoImageIcon(value[index].photo),
+                      title: AutoSizeText(
+                        value[index].name,
+                        style: StyleUtil.textStyle,
+                      ),
+                      trailing: AutoSizeText(
+                        value[index].phone,
+                        style: StyleUtil.textStyle,
+                      ),
+                      onTap: () async {
+                        await WidgetUtil.confirmPopup(
+                          '是否导出【${value[index].name}】这个联系人的照片到相册？',
+                          onTap: () async {
+                            WidgetUtil.showLoading('导出中');
+                            try {
+                              await _export(value[index]);
+                              WidgetUtil.hideLoading();
+                              WidgetUtil.showToast(
+                                '导出【${value[index].name}】成功',
+                              );
+                            } catch (e) {
+                              WidgetUtil.hideLoading();
+                              WidgetUtil.showToast(
+                                '导出【${value[index].name}】失败',
+                              );
+                            }
+                          },
+                        );
+                      },
+                    );
+                  },
+                )
+              : Center(child: Text('没有联系人', style: StyleUtil.textStyle));
+        },
+      ),
     );
   }
 
@@ -89,8 +87,9 @@ class ExportPage extends StatelessWidget {
         File file = File(info.photo);
         data = await file.readAsBytes();
       } else {
-        ByteData bytes = await rootBundle
-            .load('assets/${FlavorUtil.flavor()}/${info.photo}');
+        ByteData bytes = await rootBundle.load(
+          'assets/${FlavorUtil.flavor()}/${info.photo}',
+        );
         data = bytes.buffer.asUint8List();
       }
       PhotoManager.editor.saveImage(data, filename: '${info.name}.jpg');

@@ -24,25 +24,25 @@ class _PermissionsPageState extends State<PermissionsPage> {
 
   static List<bool> openList = [false, false, false, true];
 
-  static _accessible() async {
+  static Future<void> _accessible() async {
     bool ret = await WechatUtil().check();
     openList[0] = ret;
     WidgetUtil.showToast('设置${ret ? '成功' : '失败'}');
   }
 
-  static _call() async {
+  static Future<void> _call() async {
     bool ret = await Permission.phone.request().isGranted;
     openList[1] = ret;
     WidgetUtil.showToast('设置${ret ? '成功' : '失败'}');
   }
 
-  static _photo() async {
+  static Future<void> _photo() async {
     bool ret = await Permission.photos.request().isGranted;
     openList[2] = ret;
     WidgetUtil.showToast('设置${ret ? '成功' : '失败'}');
   }
 
-  static _settings() async {
+  static Future<void> _settings() async {
     openAppSettings();
   }
 
@@ -63,9 +63,7 @@ class _PermissionsPageState extends State<PermissionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('权限管理'),
-      ),
+      appBar: AppBar(title: const Text('权限管理')),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         children: [for (int i = 0; i < titleList.length; ++i) _buildItem(i)],

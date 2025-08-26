@@ -7,16 +7,14 @@ import 'package:image_editor/image_editor.dart';
 enum ImageType { gif, jpg }
 
 class EditImageInfo {
-  EditImageInfo(
-    this.data,
-    this.imageType,
-  );
+  EditImageInfo(this.data, this.imageType);
   final Uint8List? data;
   final ImageType imageType;
 }
 
 Future<EditImageInfo> cropImageDataWithNativeLibrary(
-    ImageEditorController imageEditorController) async {
+  ImageEditorController imageEditorController,
+) async {
   debugPrint('native library start cropping');
 
   final EditActionDetails action = imageEditorController.editActionDetails!;

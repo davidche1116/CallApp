@@ -79,16 +79,15 @@ class _AddPageState extends State<AddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            (widget.info != null) ? const Text('编辑联系人') : const Text('添加联系人'),
+        title: (widget.info != null)
+            ? const Text('编辑联系人')
+            : const Text('添加联系人'),
         actions: [
           IconButton(
             onPressed: () {
               _saveOrEdit(widget.info != null);
             },
-            icon: const Icon(
-              CupertinoIcons.tray,
-            ),
+            icon: const Icon(CupertinoIcons.tray),
           ),
         ],
       ),
@@ -140,7 +139,7 @@ class _AddPageState extends State<AddPage> {
             style: StyleUtil.textStyle,
             maxLength: 16,
             onSubmitted: (_) => _saveOrEdit(widget.info != null),
-          )
+          ),
         ],
       ),
     );
@@ -171,8 +170,8 @@ class _AddPageState extends State<AddPage> {
 
             /// 生成file文件格式
             var file = await File(
-                    '${tempDir.path}/image_${DateTime.now().toString().replaceAll(' ', '_')}.jpg')
-                .create();
+              '${tempDir.path}/image_${DateTime.now().toString().replaceAll(' ', '_')}.jpg',
+            ).create();
             //转成file文件
             file.writeAsBytesSync(result);
             _photoFilePath.value = file.path;
@@ -194,11 +193,15 @@ class _AddPageState extends State<AddPage> {
           child: AspectRatio(
             aspectRatio: 1.0,
             child: ValueListenableBuilder(
-                valueListenable: _photoFilePath,
-                builder: (BuildContext context, String value, Widget? child) {
-                  return WidgetUtil.photoImageIcon(
-                      value, 200, Colors.transparent);
-                }),
+              valueListenable: _photoFilePath,
+              builder: (BuildContext context, String value, Widget? child) {
+                return WidgetUtil.photoImageIcon(
+                  value,
+                  200,
+                  Colors.transparent,
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -211,22 +214,38 @@ class _AddPageState extends State<AddPage> {
     if (name.isEmpty || phone.isEmpty) {
       WidgetUtil.showToast('姓名和号码不能为空');
     } else {
-      await WidgetUtil.confirmPopup('是否保存【$name】？', onTap: () async {
-        if (isEdit) {
-          await DbUtil().updateInfo(PhoneInfo(name, phone, _photoFilePath.value,
-              id: widget.info!.id,
-              num: _num,
-              voice: _controllerVoice.text,
-              wechat: _controllerWechat.text));
-        } else {
-          await DbUtil().addInfo(PhoneInfo(name, phone, _photoFilePath.value,
-              voice: _controllerVoice.text, wechat: _controllerWechat.text));
-        }
-        await DbUtil().queryInfo();
-        WidgetUtil.showToast(isEdit ? '编辑成功' : '保存成功');
-        if (!mounted) return;
-        Navigator.pop(context);
-      });
+      await WidgetUtil.confirmPopup(
+        '是否保存【$name】？',
+        onTap: () async {
+          if (isEdit) {
+            await DbUtil().updateInfo(
+              PhoneInfo(
+                name,
+                phone,
+                _photoFilePath.value,
+                id: widget.info!.id,
+                num: _num,
+                voice: _controllerVoice.text,
+                wechat: _controllerWechat.text,
+              ),
+            );
+          } else {
+            await DbUtil().addInfo(
+              PhoneInfo(
+                name,
+                phone,
+                _photoFilePath.value,
+                voice: _controllerVoice.text,
+                wechat: _controllerWechat.text,
+              ),
+            );
+          }
+          await DbUtil().queryInfo();
+          WidgetUtil.showToast(isEdit ? '编辑成功' : '保存成功');
+          if (!mounted) return;
+          Navigator.pop(context);
+        },
+      );
     }
   }
 }

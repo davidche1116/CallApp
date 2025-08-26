@@ -39,21 +39,23 @@ class HomePage extends StatelessWidget {
         child: OrientationBuilder(
           builder: (context, orientation) {
             return ValueListenableBuilder(
-                valueListenable: PhoneInfo.globalInfoList,
-                builder: (BuildContext context, List<PhoneInfo> value,
-                    Widget? child) {
-                  return value.isNotEmpty
-                      ? GridView.count(
-                          crossAxisCount:
-                              orientation == Orientation.portrait ? 2 : 4,
-                          padding: const EdgeInsets.all(5),
-                          childAspectRatio: 1.2,
-                          children: List.generate(value.length, (i) {
-                            return _infoCard(context, value[i]);
-                          }),
-                        )
-                      : _noContact(context, orientation);
-                });
+              valueListenable: PhoneInfo.globalInfoList,
+              builder:
+                  (BuildContext context, List<PhoneInfo> value, Widget? child) {
+                    return value.isNotEmpty
+                        ? GridView.count(
+                            crossAxisCount: orientation == Orientation.portrait
+                                ? 2
+                                : 4,
+                            padding: const EdgeInsets.all(5),
+                            childAspectRatio: 1.2,
+                            children: List.generate(value.length, (i) {
+                              return _infoCard(context, value[i]);
+                            }),
+                          )
+                        : _noContact(context, orientation);
+                  },
+            );
           },
         ),
       ),
@@ -99,10 +101,7 @@ class HomePage extends StatelessWidget {
                   width: 160,
                   height: 60,
                   child: Center(
-                    child: Text(
-                      '进入菜单',
-                      style: StyleUtil.textStyle,
-                    ),
+                    child: Text('进入菜单', style: StyleUtil.textStyle),
                   ),
                 ),
               ),
@@ -158,15 +157,12 @@ class HomePage extends StatelessWidget {
                       width: 160,
                       height: 60,
                       child: Center(
-                        child: Text(
-                          '进入菜单',
-                          style: StyleUtil.textStyle,
-                        ),
+                        child: Text('进入菜单', style: StyleUtil.textStyle),
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -194,10 +190,7 @@ class HomePage extends StatelessWidget {
           _showDialog(info);
         }
       },
-      child: Card(
-        color: info.color(),
-        child: _picture(info),
-      ),
+      child: Card(color: info.color(), child: _picture(info)),
     );
   }
 
@@ -208,16 +201,16 @@ class HomePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: info.photo.isNotEmpty
             ? info.photo.contains('/')
-                ? Image.file(
-                    File(info.photo),
-                    fit: BoxFit.cover,
-                    errorBuilder: WidgetUtil.errorImage,
-                  )
-                : Image.asset(
-                    'assets/${FlavorUtil.flavor()}/${info.photo}',
-                    fit: BoxFit.cover,
-                    errorBuilder: WidgetUtil.errorImage,
-                  )
+                  ? Image.file(
+                      File(info.photo),
+                      fit: BoxFit.cover,
+                      errorBuilder: WidgetUtil.errorImage,
+                    )
+                  : Image.asset(
+                      'assets/${FlavorUtil.flavor()}/${info.photo}',
+                      fit: BoxFit.cover,
+                      errorBuilder: WidgetUtil.errorImage,
+                    )
             : Padding(
                 padding: const EdgeInsets.all(20),
                 child: Center(
@@ -256,8 +249,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(PhoneInfo? info, Color color, IconData iconData,
-      {double? w, double? h}) {
+  Widget _buildButton(
+    PhoneInfo? info,
+    Color color,
+    IconData iconData, {
+    double? w,
+    double? h,
+  }) {
     return GestureDetector(
       onTap: () {
         if (info != null) {
@@ -274,11 +272,7 @@ class HomePage extends StatelessWidget {
         child: SizedBox(
           width: w ?? double.infinity,
           height: h ?? double.infinity,
-          child: Icon(
-            iconData,
-            color: Colors.white70,
-            size: 68,
-          ),
+          child: Icon(iconData, color: Colors.white70, size: 68),
         ),
       ),
     );
@@ -300,10 +294,7 @@ class HomePage extends StatelessWidget {
                     }
                     SmartDialog.dismiss(status: SmartStatus.allDialog);
                   },
-                  child: Card(
-                    color: info.color(),
-                    child: _picture(info),
-                  ),
+                  child: Card(color: info.color(), child: _picture(info)),
                 ),
               ),
               Column(
@@ -312,22 +303,31 @@ class HomePage extends StatelessWidget {
                     visible: info.wechat.isNotEmpty && wechat,
                     child: Expanded(
                       child: _buildButton(
-                          info, Colors.blue, CupertinoIcons.videocam_fill,
-                          w: 180),
+                        info,
+                        Colors.blue,
+                        CupertinoIcons.videocam_fill,
+                        w: 180,
+                      ),
                     ),
                   ),
                   Expanded(
                     child: _buildButton(
-                        info, Colors.green, CupertinoIcons.phone_fill,
-                        w: 180),
+                      info,
+                      Colors.green,
+                      CupertinoIcons.phone_fill,
+                      w: 180,
+                    ),
                   ),
                   Expanded(
                     child: _buildButton(
-                        null, Colors.red, CupertinoIcons.phone_down_fill,
-                        w: 180),
+                      null,
+                      Colors.red,
+                      CupertinoIcons.phone_down_fill,
+                      w: 180,
+                    ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -349,17 +349,18 @@ class HomePage extends StatelessWidget {
               }
               SmartDialog.dismiss(status: SmartStatus.allDialog);
             },
-            child: Card(
-              color: info.color(),
-              child: _picture(info),
-            ),
+            child: Card(color: info.color(), child: _picture(info)),
           ),
         ),
         _buildCallNum(num),
         Visibility(
           visible: info.wechat.isNotEmpty && wechat,
-          child: _buildButton(info, Colors.blue, CupertinoIcons.videocam_fill,
-              h: 68),
+          child: _buildButton(
+            info,
+            Colors.blue,
+            CupertinoIcons.videocam_fill,
+            h: 68,
+          ),
         ),
         _buildButton(info, Colors.green, CupertinoIcons.phone_fill, h: 68),
         _buildButton(null, Colors.red, CupertinoIcons.phone_down_fill, h: 68),
@@ -384,12 +385,12 @@ class HomePage extends StatelessWidget {
         }
         Widget child =
             MediaQuery.of(context).orientation == Orientation.portrait
-                ? _buildDialogPortrait(info, num, wechat)
-                : _buildDialogLandscape(info, num, wechat);
+            ? _buildDialogPortrait(info, num, wechat)
+            : _buildDialogLandscape(info, num, wechat);
         child = child.animate().shimmer(
-              duration: 1500.ms,
-              color: Colors.white.withValues(alpha: 0.4),
-            );
+          duration: 1500.ms,
+          color: Colors.white.withValues(alpha: 0.4),
+        );
 
         return Container(
           constraints: BoxConstraints(maxWidth: w, maxHeight: h),
@@ -403,10 +404,7 @@ class HomePage extends StatelessWidget {
         );
       },
       maskWidget: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 5,
-          sigmaY: 5,
-        ),
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: Container(
           width: double.infinity,
           height: double.infinity,

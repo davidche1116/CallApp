@@ -13,15 +13,9 @@ class StyleUtil {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle textStyle = const TextStyle(
-    fontSize: 20,
-  );
+  static TextStyle textStyle = const TextStyle(fontSize: 20);
 
-  static TextStyle buttonTextStyle = const TextStyle(
-    fontSize: 40,
-  );
+  static TextStyle buttonTextStyle = const TextStyle(fontSize: 40);
 
-  static TextStyle trailingTextStyle = const TextStyle(
-    fontSize: 16,
-  );
+  static TextStyle trailingTextStyle = const TextStyle(fontSize: 16);
 }

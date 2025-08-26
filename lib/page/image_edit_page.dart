@@ -74,11 +74,11 @@ class _ImageEditPageState extends State<ImageEditPage> {
                         /// 压缩
                         var result =
                             await FlutterImageCompress.compressWithList(
-                          list!,
-                          minHeight: 800,
-                          minWidth: 800,
-                          quality: 90,
-                        );
+                              list!,
+                              minHeight: 800,
+                              minWidth: 800,
+                              quality: 90,
+                            );
 
                         WidgetUtil.hideLoading();
 
@@ -86,9 +86,7 @@ class _ImageEditPageState extends State<ImageEditPage> {
                           Navigator.pop(context, result);
                         }
                       },
-                      child: const Text(
-                        '完成',
-                      ),
+                      child: const Text('完成'),
                     ),
                     SizedBox(width: 20),
                   ],
@@ -114,19 +112,21 @@ class _ImageEditPageState extends State<ImageEditPage> {
                                 HapticFeedback.vibrate();
 
                                 _editorController.rotate(
-                                  degree: value.toDouble() -
+                                  degree:
+                                      value.toDouble() -
                                       _rulerPickerController.value,
                                 );
 
-                                _rulerPickerController
-                                    .setValueWithOutNotify(value);
+                                _rulerPickerController.setValueWithOutNotify(
+                                  value,
+                                );
                               },
                               width: b.maxWidth,
                               height: 50,
                               onBuildRulerScaleText:
                                   (int index, num rulerScaleValue) {
-                                return '$rulerScaleValue';
-                              },
+                                    return '$rulerScaleValue';
+                                  },
                               ranges: const <RulerRange>[
                                 RulerRange(begin: -45, end: 45, scale: 1),
                               ],
@@ -148,10 +148,7 @@ class _ImageEditPageState extends State<ImageEditPage> {
                             _editorController.undo();
                           });
                         },
-                        icon: Icon(
-                          Icons.undo,
-                          size: 30,
-                        ),
+                        icon: Icon(Icons.undo, size: 30),
                       ),
                       IconButton(
                         onPressed: () {
@@ -159,26 +156,18 @@ class _ImageEditPageState extends State<ImageEditPage> {
                             _editorController.redo();
                           });
                         },
-                        icon: Icon(
-                          Icons.redo,
-                          size: 30,
-                        ),
+                        icon: Icon(Icons.redo, size: 30),
                       ),
                       IconButton(
                         onPressed: () {
                           _rulerPickerController.value = 0;
                           _editorController.reset();
                         },
-                        icon: Icon(
-                          Icons.restore,
-                          size: 30,
-                        ),
+                        icon: Icon(Icons.restore, size: 30),
                       ),
                       IconButton(
                         onPressed: () {
-                          _editorController.flip(
-                            animation: true,
-                          );
+                          _editorController.flip(animation: true);
                         },
                         icon: const Icon(Icons.flip, size: 30),
                       ),
@@ -221,8 +210,9 @@ class _ImageEditPageState extends State<ImageEditPage> {
   Future<Uint8List?> _cropImage(bool useNative) async {
     String msg = '';
     try {
-      EditImageInfo imageInfo =
-          await cropImageDataWithNativeLibrary(_editorController);
+      EditImageInfo imageInfo = await cropImageDataWithNativeLibrary(
+        _editorController,
+      );
       return imageInfo.data;
     } catch (e, stack) {
       msg = 'save failed: $e\n $stack';

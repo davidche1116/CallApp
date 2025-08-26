@@ -1,10 +1,24 @@
 /// 语音播报设置
 class VoiceVibrationSet {
-  static final defaultVoiceVibrationSet =
-      VoiceVibrationSet(true, 100, 40, 100, true, 100, 125);
+  static final defaultVoiceVibrationSet = VoiceVibrationSet(
+    true,
+    100,
+    40,
+    100,
+    true,
+    100,
+    125,
+  );
 
-  VoiceVibrationSet(this.voice, this.volume, this.rate, this.pitch,
-      this.vibration, this.duration, this.amplitude);
+  VoiceVibrationSet(
+    this.voice,
+    this.volume,
+    this.rate,
+    this.pitch,
+    this.vibration,
+    this.duration,
+    this.amplitude,
+  );
 
   final int id = 0;
 

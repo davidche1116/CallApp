@@ -18,7 +18,7 @@ class TtsVibrationUtil {
 
   /// 不同手机声音、音调、语速不同，可自行调整
   /// 手机没有自带tts或自带的不好听可以下载安装讯飞tts
-  init() async {
+  Future<void> init() async {
     _tts = FlutterTts();
 
     _set = await DbUtil().getVoiceVibration();

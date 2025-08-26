@@ -28,8 +28,9 @@ class MenuPage extends StatelessWidget {
     '权限管理',
     '导出照片',
     '数据库管理',
-    '关于信息'
+    '关于信息',
   ];
+
   final List<IconData> _iconList = [
     CupertinoIcons.square_list,
     CupertinoIcons.bell,
@@ -40,8 +41,9 @@ class MenuPage extends StatelessWidget {
     CupertinoIcons.exclamationmark_shield,
     CupertinoIcons.photo_on_rectangle,
     CupertinoIcons.tray_full,
-    CupertinoIcons.house
+    CupertinoIcons.house,
   ];
+
   final List<Widget> _pageList = [
     const RecordPage(),
     const VoiceVibrationPage(),
@@ -52,20 +54,22 @@ class MenuPage extends StatelessWidget {
     const PermissionsPage(),
     const ExportPage(),
     const DataPage(),
-    const AboutPage()
+    const AboutPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> listMenu = [
-      for (final menu in _menuList) _menuCard(_menuList.indexOf(menu), context)
-    ];
-    listMenu =
-        listMenu.animate().flip(duration: const Duration(milliseconds: 500));
+    List<Widget> listMenu =
+        [
+              for (final menu in _menuList)
+                _menuCard(_menuList.indexOf(menu), context),
+            ]
+            .animate(interval: const Duration(milliseconds: 100))
+            .flip(duration: const Duration(milliseconds: 500))
+            .fade(duration: const Duration(milliseconds: 300));
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('菜单'),
-      ),
+      appBar: AppBar(title: const Text('菜单')),
       body: OrientationBuilder(
         builder: (context, orientation) {
           return GridView.count(
@@ -80,43 +84,53 @@ class MenuPage extends StatelessWidget {
   }
 
   Widget _menuCard(int index, BuildContext context) {
+    final color = Colors.primaries[index % Colors.primaries.length];
     return OpenContainer(
       closedColor: Colors.transparent,
       middleColor: Color.lerp(
-          Colors.primaries[index % Colors.primaries.length].shade500,
-          Theme.of(context).scaffoldBackgroundColor,
-          0.5),
+        color.shade500,
+        Theme.of(context).scaffoldBackgroundColor,
+        0.5,
+      ),
       openColor: Theme.of(context).scaffoldBackgroundColor,
       transitionType: ContainerTransitionType.fadeThrough,
+      transitionDuration: const Duration(milliseconds: 500),
       closedShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+      closedElevation: 4,
       closedBuilder: (context, action) {
         return Card(
-          color: Colors.primaries[index % Colors.primaries.length].shade500,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Icon(
-                  _iconList[index],
-                  size: MediaQuery.of(context).size.shortestSide / 8,
-                ),
-                AutoSizeText(
-                  _menuList[index],
-                  style: StyleUtil.textLargeWhite,
-                  maxLines: 1,
-                )
-              ],
+          color: color.shade500,
+          elevation: 0,
+          child: InkWell(
+            onTap: action,
+            borderRadius: BorderRadius.circular(20),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    _iconList[index],
+                    size: MediaQuery.of(context).size.shortestSide / 8,
+                  ),
+                  const SizedBox(height: 12),
+                  AutoSizeText(
+                    _menuList[index],
+                    style: StyleUtil.textLargeWhite.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
-      openShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      openShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       openBuilder: (context, action) {
         return _pageList[index];
       },

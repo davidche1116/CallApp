@@ -15,48 +15,53 @@ class WidgetUtil {
     String? buttonText,
     Color buttonColor = Colors.green,
   }) async {
-    await SmartDialog.show(builder: (context) {
-      return ConstrainedBox(
-        constraints: BoxConstraints.loose(const Size(280, 500)),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.8),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                AutoSizeText(
-                  msg,
-                  style: StyleUtil.textLargeBlack,
-                  maxLines: msg.length ~/ 8 + 1,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    SmartDialog.dismiss(status: SmartStatus.allDialog);
-                    if (onTap != null) {
-                      onTap();
-                    }
-                  },
-                  child: Card(
-                    color: buttonColor,
-                    child: SizedBox(
+    await SmartDialog.show(
+      builder: (context) {
+        return ConstrainedBox(
+          constraints: BoxConstraints.loose(const Size(280, 500)),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.8),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AutoSizeText(
+                    msg,
+                    style: StyleUtil.textLargeBlack,
+                    maxLines: msg.length ~/ 8 + 1,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      SmartDialog.dismiss(status: SmartStatus.allDialog);
+                      if (onTap != null) {
+                        onTap();
+                      }
+                    },
+                    child: Card(
+                      color: buttonColor,
+                      child: SizedBox(
                         height: 60,
                         child: Center(
-                          child: AutoSizeText(buttonText ?? '确定',
-                              style: StyleUtil.buttonTextStyle),
-                        )),
+                          child: AutoSizeText(
+                            buttonText ?? '确定',
+                            style: StyleUtil.buttonTextStyle,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   static Future<void> showToast(String msg) async {
@@ -91,46 +96,43 @@ class WidgetUtil {
   static Widget titleText(String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-      child: AutoSizeText(
-        title,
-        style: StyleUtil.textStyle,
-      ),
+      child: AutoSizeText(title, style: StyleUtil.textStyle),
     );
   }
 
-  static Widget photoImageIcon(String photoPath,
-      [int size = 50, Color? color]) {
+  static Widget photoImageIcon(
+    String photoPath, [
+    int size = 50,
+    Color? color,
+  ]) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: photoPath.isNotEmpty
           ? photoPath.contains('/')
-              ? Image.file(
-                  File(photoPath),
-                  fit: BoxFit.cover,
-                  width: size.toDouble(),
-                  height: size.toDouble(),
-                  cacheWidth: size * 3,
-                  cacheHeight: size * 3,
-                  errorBuilder: WidgetUtil.errorImageSmall,
-                )
-              : Image.asset(
-                  'assets/${FlavorUtil.flavor()}/$photoPath',
-                  fit: BoxFit.cover,
-                  width: size.toDouble(),
-                  height: size.toDouble(),
-                  cacheWidth: size * 3,
-                  cacheHeight: size * 3,
-                  errorBuilder: WidgetUtil.errorImageSmall,
-                )
+                ? Image.file(
+                    File(photoPath),
+                    fit: BoxFit.cover,
+                    width: size.toDouble(),
+                    height: size.toDouble(),
+                    cacheWidth: size * 3,
+                    cacheHeight: size * 3,
+                    errorBuilder: WidgetUtil.errorImageSmall,
+                  )
+                : Image.asset(
+                    'assets/${FlavorUtil.flavor()}/$photoPath',
+                    fit: BoxFit.cover,
+                    width: size.toDouble(),
+                    height: size.toDouble(),
+                    cacheWidth: size * 3,
+                    cacheHeight: size * 3,
+                    errorBuilder: WidgetUtil.errorImageSmall,
+                  )
           : Container(
               color: color ?? Colors.grey.shade600,
               width: size.toDouble(),
               height: size.toDouble(),
               child: Center(
-                child: Icon(
-                  CupertinoIcons.person_solid,
-                  size: size / 1.2,
-                ),
+                child: Icon(CupertinoIcons.person_solid, size: size / 1.2),
               ),
             ),
     );
@@ -147,16 +149,10 @@ class WidgetUtil {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              CupertinoIcons.xmark_circle,
-              size: 40,
-              color: Colors.red,
-            ),
+            Icon(CupertinoIcons.xmark_circle, size: 40, color: Colors.red),
             Text(
               '图片加载失败',
-              style: StyleUtil.textStyle.copyWith(
-                color: Colors.red,
-              ),
+              style: StyleUtil.textStyle.copyWith(color: Colors.red),
             ),
           ],
         ),
@@ -175,11 +171,7 @@ class WidgetUtil {
         width: 50,
         height: 50,
         child: Center(
-          child: Icon(
-            CupertinoIcons.xmark_circle,
-            size: 30,
-            color: Colors.red,
-          ),
+          child: Icon(CupertinoIcons.xmark_circle, size: 30, color: Colors.red),
         ),
       ),
     );

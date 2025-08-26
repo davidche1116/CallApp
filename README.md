@@ -2,15 +2,7 @@
 
 # Call打电话
 
-一个工具类APP，用于老人快捷方便拨打家人电话、微信视频通话。使用Flutter编写
-
-## 开发环境
-
-- flutter 3.29.0
-- dart 3.7.0
-- gradle 8.10.2
-- gradle-plugin 8.7.0
-- kotlin 1.8.22
+一个工具类APP，用于老人快捷方便拨打家人电话、微信视频通话。使用Flutter编写。
 
 ## 功能特点
 
@@ -24,20 +16,29 @@
 - 联系人数据库管理
 - 手机系统信息查看
 
-## 界面截图
-![UI](assets/screenshot/ui.jpg)
+## 界面预览
 
-## 源码说明
+![主界面预览](assets/screenshot/ui.jpg)
 
-> ```
-> Call
-> ├─android              # Android工程配置
-> ├─assets               # 资源文件目录
-> ├─ios                  # iOS工程配置
-> ├─lib                  # flutter源代码目录
-> │  ├─data              # 数据类
-> │  ├─page              # 各个页面
-> │  ├─utls              # 工具类
-> │  └─main.dart         # APP入口
-> └─test                 # 测试目录
-> ```
+## 开发环境
+
+- Flutter 3.35.1
+- Dart 3.9.0
+- Gradle 8.12
+- Gradle-plugin 8.9.1
+- Kotlin 2.1.0
+
+## 项目结构
+
+```
+Call
+├─android              # Android工程配置
+├─assets               # 资源文件目录
+├─ios                  # iOS工程配置
+├─lib                  # Flutter源代码目录
+│  ├─data              # 数据类
+│  ├─page              # 各个页面
+│  ├─utls              # 工具类
+│  └─main.dart         # APP入口
+└─test                 # 测试目录
+```

@@ -6,16 +6,18 @@ class CallRecord {
   final String name;
   final String photo;
 
-  CallRecord(this.phone, this.time,
-      {this.id = 0, this.name = '', this.photo = ''});
+  CallRecord(
+    this.phone,
+    this.time, {
+    this.id = 0,
+    this.name = '',
+    this.photo = '',
+  });
 
   // Convert into a Map. The keys must correspond to the names of the
   // columns in the database.
   Map<String, dynamic> toMap() {
-    return {
-      'PHONE': phone,
-      'TIME': time.toString().substring(0, 19),
-    };
+    return {'PHONE': phone, 'TIME': time.toString().substring(0, 19)};
   }
 
   // Implement toString to make it easier to see information about

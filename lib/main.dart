@@ -18,16 +18,17 @@ void main() {
 class CallApp extends StatelessWidget {
   const CallApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color(0xFF1677FF);
+
     return MediaQuery.withNoTextScaling(
       child: MaterialApp(
         title: '打电话',
         theme: ThemeData(
           brightness: Brightness.dark,
           colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF1677FF),
+            seedColor: primaryColor,
             brightness: Brightness.dark,
             dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
           ),
@@ -40,9 +41,7 @@ class CallApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('zh', 'CN'),
-        ],
+        supportedLocales: const [Locale('zh', 'CN')],
         locale: const Locale('zh', 'CN'),
       ),
     );

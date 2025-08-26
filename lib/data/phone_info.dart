@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 /// 卡片手机号码信息
 class PhoneInfo {
-  PhoneInfo(this.name, this.phone, this.photo,
-      {this.id = -1, this.num = 0, this.voice = '', this.wechat = ''});
+  PhoneInfo(
+    this.name,
+    this.phone,
+    this.photo, {
+    this.id = -1,
+    this.num = 0,
+    this.voice = '',
+    this.wechat = '',
+  });
 
   final int id;
 
@@ -69,8 +76,9 @@ class PhoneInfo {
   }
 
   /// 全局电话信息（每个界面都用）
-  static ValueNotifier<List<PhoneInfo>> globalInfoList =
-      ValueNotifier(defaultList());
+  static ValueNotifier<List<PhoneInfo>> globalInfoList = ValueNotifier(
+    defaultList(),
+  );
 
   /// github
   static final List<PhoneInfo> _listGithub = [];
