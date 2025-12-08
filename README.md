@@ -22,11 +22,11 @@
 
 ## 开发环境
 
-- Flutter 3.35.1
-- Dart 3.9.0
-- Gradle 8.12
-- Gradle-plugin 8.9.1
-- Kotlin 2.1.0
+- Flutter 3.38.4
+- Dart 3.10.3
+- Gradle 8.14
+- Gradle-plugin 8.11.1
+- Kotlin 2.2.20
 
 ## 项目结构
 
