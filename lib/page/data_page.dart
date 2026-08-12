@@ -28,16 +28,16 @@ class DataPage extends StatelessWidget {
   }
 
   static Future<void> _import() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    PlatformFile? result = await FilePicker.pickFile();
     if (result != null) {
-      await DbUtil().import(result.paths.first!);
+      await DbUtil().import(result.path!);
     }
     WidgetUtil.showToast(result != null ? '导入成功' : '取消导入');
   }
 
   static Future<void> _export() async {
     Uint8List bytes = await DbUtil().getDataBytes();
-    String? outputFile = await FilePicker.platform.saveFile(
+    String? outputFile = await FilePicker.saveFile(
       fileName: 'call_info.db',
       bytes: bytes,
     );

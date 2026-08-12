@@ -93,11 +93,8 @@ class _ReorderPageState extends State<ReorderPage> {
         onReorderStart: (index) {
           HapticFeedback.mediumImpact();
         },
-        onReorder: (int oldIndex, int newIndex) {
+        onReorderItem: (int oldIndex, int newIndex) {
           setState(() {
-            if (oldIndex < newIndex) {
-              newIndex -= 1;
-            }
             final PhoneInfo item = _phoneInfoList.removeAt(oldIndex);
             _phoneInfoList.insert(newIndex, item);
           });
